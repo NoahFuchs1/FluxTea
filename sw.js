@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tee-app-v2';
+const CACHE_NAME = 'tee-app-v3';
 const ASSETS = [
   './',
   './index.html',

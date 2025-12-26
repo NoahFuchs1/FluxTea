@@ -3,8 +3,8 @@
   "short_name": "FluxTea",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f0f2f5",
-  "theme_color": "#2c3e50",
+  "background_color": "#F2F2F7",
+  "theme_color": "#F2F2F7",
   "orientation": "portrait",
   "icons": [
     {
@@ -19,3 +19,4 @@
     }
   ]
 }
+

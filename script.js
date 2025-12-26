@@ -22,7 +22,8 @@ const els = {
 
 // Event Listener für alle Inputs
 [els.vol, els.t_target, els.t_hot, els.t_cold_ice, els.t_cold_water].forEach(el => {
-    el.addEventListener('input', calculate);
+    el.addEventListener('input', calculate); // Für Tippen
+    el.addEventListener('change', calculate); // Sicherer für Selects
 });
 
 els.method.addEventListener('change', () => {

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#2c3e50">
     <meta name="description" content="Berechne die perfekte Teetemperatur mit Eis oder Wasser.">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
     <title>Flux Tea</title>
     
     <!-- PWA Manifest Link (optional, wenn Sie später eine manifest.json anlegen) -->
@@ -25,82 +26,125 @@
 
     <main class="container">
         
-        <!-- Ergebnis Karte (Sticky oben für schnelle Sichtbarkeit) -->
-        <div class="card result-card">
-            <div class="result-grid">
-                <div class="res-item">
-                    <span class="res-label">1. Heißes Wasser</span>
-                    <span class="res-value" id="res_hot">0 g</span>
+        <!-- Ergebnis Karte: High End Dark Mode -->
+        <div class="result-card">
+            <div class="result-header">Mischverhältnis</div>
+            <div class="result-flex">
+                <div class="res-box">
+                    <span class="res-val" id="res_hot">0</span>
+                    <span class="res-unit">g Heiß</span>
                 </div>
-                <div class="res-divider">+</div>
-                <div class="res-item">
-                    <span class="res-label" id="res_type_text">2. Eiswürfel</span>
-                    <span class="res-value" id="res_cold">0 g</span>
+                <div class="res-plus">+</div>
+                <div class="res-box highlight-box">
+                    <span class="res-val" id="res_cold">0</span>
+                    <span class="res-unit" id="res_type_text">g Eis</span>
                 </div>
             </div>
-            <div class="res-total">
-                = <span id="res_total">0</span> g Gesamt
+            <div class="res-footer">
+                Gesamtmenge: <span id="res_total">0</span> g
             </div>
         </div>
 
-        <!-- Eingabe Karte -->
-        <div class="card input-card">
-            <h3>Einstellungen</h3>
+        <!-- Settings im "iOS Grouped" Look -->
+        <div class="settings-group-title">Zubereitung</div>
+        <div class="ios-list">
             
-            <div class="input-row">
-                <label for="vol">Kannenvolumen (ml)</label>
-                <input type="number" id="vol" value="360" inputmode="numeric">
+            <!-- Kannenvolumen (Input bleibt hier besser, aber gestyled) -->
+            <div class="list-item">
+                <label for="vol">Kannenvolumen</label>
+                <div class="input-wrapper">
+                    <input type="number" id="vol" value="360" inputmode="numeric" pattern="[0-9]*">
+                    <span class="unit">ml</span>
+                </div>
             </div>
 
-            <div class="input-row">
-                <label for="t_target">Trinktemperatur (°C)</label>
-                <input type="number" id="t_target" value="54" inputmode="numeric">
+            <!-- Zieltemperatur (SELECT = Native Wheel) -->
+            <div class="list-item">
+                <label for="t_target">Trinktemperatur</label>
+                <div class="select-wrapper">
+                    <select id="t_target">
+                        <!-- Wird per JS gefüllt für perfekte Ranges -->
+                    </select>
+                </div>
             </div>
 
-            <div class="input-row">
-                <label for="t_hot">Tee-Temperatur (°C)</label>
-                <input type="number" id="t_hot" value="90" inputmode="numeric">
-            </div>
-
-            <div class="input-row">
-                <label for="method">Kühlmethode</label>
-                <select id="method">
-                    <option value="ice">🧊 Eiswürfel</option>
-                    <option value="water">💧 Kaltes Wasser</option>
-                </select>
-            </div>
-
-            <div class="input-row" id="ice-temp-group">
-                <label for="t_cold_ice">Eis-Temperatur (°C)</label>
-                <input type="number" id="t_cold_ice" value="-18" inputmode="numeric">
-            </div>
-
-            <div class="input-row hidden" id="water-temp-group">
-                <label for="t_cold_water">Wasser-Temperatur (°C)</label>
-                <input type="number" id="t_cold_water" value="10" inputmode="numeric">
+            <!-- Tee Temperatur (SELECT = Native Wheel) -->
+            <div class="list-item">
+                <label for="t_hot">Tee-Temperatur</label>
+                <div class="select-wrapper">
+                    <select id="t_hot">
+                        <!-- Wird per JS gefüllt -->
+                    </select>
+                </div>
             </div>
         </div>
 
-        <!-- Transparenz Bereich -->
-        <details class="card formula-card">
-            <summary>🔎 Wie wird das berechnet?</summary>
-            <div class="formula-content" id="formula-log">
-                <!-- JS füllt dies -->
+        <div class="settings-group-title">Kühlung</div>
+        <div class="ios-list">
+            
+            <!-- Methode -->
+            <div class="list-item">
+                <label for="method">Methode</label>
+                <div class="select-wrapper">
+                    <select id="method">
+                        <option value="ice">Eiswürfel</option>
+                        <option value="water">Kaltes Wasser</option>
+                    </select>
+                </div>
             </div>
-        </details>
+
+            <!-- Eis/Wasser Temp (Dynamisch) -->
+            <div class="list-item" id="ice-temp-group">
+                <label for="t_cold_ice">Eis-Temperatur</label>
+                <div class="select-wrapper">
+                    <select id="t_cold_ice">
+                        <option value="-18">-18°C (Tiefkühl)</option>
+                        <option value="-5">-5°C</option>
+                        <option value="0">0°C (Schmelzend)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="list-item hidden" id="water-temp-group">
+                <label for="t_cold_water">Wasser-Temperatur</label>
+                <div class="select-wrapper">
+                    <select id="t_cold_water">
+                         <!-- Wird per JS gefüllt -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diskreter Details Link -->
+        <div class="meta-links">
+            <details>
+                <summary>Berechnungsdetails anzeigen</summary>
+                <div class="formula-content" id="formula-log"></div>
+            </details>
+        </div>
 
     </main>
 
     <script src="script.js"></script>
+    <!-- Script zum Befüllen der Select-Optionen (Ranges) -->
     <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('Service Worker registriert!', reg))
-                .catch(err => console.log('Service Worker Fehler:', err));
-        });
-    }
-</script>
+        // Hilfsfunktion um Zahlen-Ranges zu erstellen
+        function populateSelect(id, start, end, selected, step = 1) {
+            const el = document.getElementById(id);
+            el.innerHTML = '';
+            for (let i = start; i <= end; i += step) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.text = i + " °C";
+                if (i === selected) opt.selected = true;
+                el.appendChild(opt);
+            }
+        }
 
+        // Ranges initialisieren (Damit das Rad schön voll ist)
+        populateSelect('t_target', 20, 80, 54); // Trinktemp 20-80
+        populateSelect('t_hot', 60, 100, 90);   // Tee Temp 60-100
+        populateSelect('t_cold_water', 4, 25, 10); // Kaltwasser 4-25
+    </script>
 </body>
 </html>

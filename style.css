@@ -1,227 +1,249 @@
 :root {
-    --primary: #2c3e50;
-    --accent: #27ae60; /* Frisches Tee-Grün */
-    --accent-dark: #219150;
-    --bg: #f0f2f5;
-    --card-bg: #ffffff;
-    --text: #333;
-    --border: #e1e4e8;
-}
-
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+    --ios-bg: #F2F2F7;         /* Standard iOS Hintergrund Grau */
+    --ios-card: #FFFFFF;       /* Reinweiß für Listen */
+    --ios-text: #000000;
+    --ios-label: #8E8E93;      /* Helles Grau für Labels */
+    --ios-blue: #007AFF;       /* Das klassische Apple Blau */
+    --ios-separator: #C6C6C8;
+    
+    --brand-dark: #1c1c1e;     /* Fast Schwarz für die Ergebnis-Karte */
+    --brand-copper: #bf8a77;   /* Dein Icon-Ton als Akzent */
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
+    background-color: var(--ios-bg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ios-text);
     margin: 0;
-    padding: 0;
-    padding-bottom: 40px; /* Platz unten */
+    padding-bottom: 50px;
+    -webkit-font-smoothing: antialiased;
 }
 
 header {
-    background: var(--primary);
-    color: white;
-    text-align: center;
-    
-    /* Fix für Sticky Header + Status Bar */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    
-    /* Innenabstand für die Notch (Safe Area) */
-    padding-top: env(safe-area-inset-top); 
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 15px;
-    
-    /* Schatten für Tiefe */
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 20px 20px 5px 20px;
+    background: var(--ios-bg); /* Verschmilzt mit Hintergrund */
 }
 
-/* Der eigentliche Titel braucht etwas Abstand nach oben, 
-   damit er nicht direkt an der Notch klebt, falls env() nicht greift */
 header h1 {
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--brand-dark);
     margin: 0;
-    padding-top: 10px; 
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-
-h1 {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-.container {
-    max-width: 600px; /* Schmal genug für Mobile-Feel auch am Desktop */
-    margin: 0 auto;
-    padding: 15px;
-}
-
-.card {
-    background: var(--card-bg);
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-    border: 1px solid rgba(0,0,0,0.02);
-}
-
-/* Ergebnis Karte Highlight */
-.result-card {
-    background: linear-gradient(135deg, var(--primary), #34495e);
-    color: white;
-}
-
-.result-grid {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.res-item {
-    text-align: center;
-    flex: 1;
-}
-
-.res-label {
-    display: block;
-    font-size: 0.8rem;
-    opacity: 0.8;
-    margin-bottom: 5px;
-}
-
-.res-value {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-}
-
-.res-divider {
-    font-size: 1.5rem;
-    opacity: 0.5;
-    padding: 0 10px;
-}
-
-.res-total {
-    text-align: center;
-    font-size: 0.9rem;
-    opacity: 0.7;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 10px;
-    margin-top: 5px;
-}
-
-/* Inputs */
-h3 {
-    margin-top: 0;
-    font-size: 1rem;
-    color: var(--primary);
-    border-bottom: 2px solid var(--bg);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-
-.input-row {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: #666;
-}
-
-input, select {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    font-size: 1.1rem; /* Groß genug um Zoom auf iOS zu verhindern */
-    background: #f9f9f9;
-    transition: all 0.2s;
-    appearance: none; /* Entfernt native Styles */
-}
-
-input:focus, select:focus {
-    border-color: var(--accent);
-    background: #fff;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
-}
-
-.hidden {
-    display: none;
-}
-
-/* Formel Details */
-details {
-    cursor: pointer;
-}
-
-summary {
-    font-weight: 600;
-    color: var(--primary);
-    list-style: none; /* Dreieck ausblenden */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-summary::-webkit-details-marker {
-    display: none;
-}
-
-summary::after {
-    content: '+';
-    font-size: 1.2rem;
-}
-
-details[open] summary::after {
-    content: '-';
-}
-
-.formula-content {
-    margin-top: 15px;
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-family: monospace;
-    overflow-x: auto;
-}
-
-.step {
-    margin-bottom: 20px;
-    border-left: 3px solid var(--accent);
+    text-align: left; /* iOS Title Style */
     padding-left: 10px;
 }
 
-.step-title {
-    font-weight: bold;
-    color: var(--primary);
-    font-family: sans-serif;
-    margin-bottom: 5px;
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.math-row {
-    margin: 4px 0;
-    color: #555;
+/* --- PREMIUM RESULT CARD --- */
+.result-card {
+    background: var(--brand-dark);
+    color: white;
+    border-radius: 22px;
+    padding: 25px;
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.highlight {
-    color: var(--accent-dark);
-    font-weight: bold;
-    background: rgba(39, 174, 96, 0.1);
-    padding: 0 4px;
-    border-radius: 4px;
+/* Dekorativer Glow im Hintergrund */
+.result-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(191, 138, 119, 0.15) 0%, transparent 60%);
+    pointer-events: none;
 }
+
+.result-header {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    opacity: 0.6;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.result-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.res-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.res-val {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums; /* Verhindert Springen der Zahlen */
+}
+
+.res-unit {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.highlight-box .res-val {
+    color: var(--brand-copper); /* Kupfer-Farbe nur für das Wichtigste */
+}
+
+.res-plus {
+    font-size: 1.5rem;
+    opacity: 0.3;
+    font-weight: 300;
+}
+
+.res-footer {
+    font-size: 0.9rem;
+    opacity: 0.5;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 15px;
+    margin-top: 5px;
+}
+
+/* --- IOS SETTINGS LIST STYLE --- */
+.settings-group-title {
+    font-size: 0.8rem;
+    color: #6d6d72;
+    text-transform: uppercase;
+    margin-left: 15px;
+    margin-bottom: 8px;
+    margin-top: 25px;
+    font-weight: 400;
+}
+
+.ios-list {
+    background: var(--ios-card);
+    border-radius: 12px;
+    overflow: hidden; /* Damit Ecken rund bleiben */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: var(--ios-card);
+    border-bottom: 0.5px solid rgba(0,0,0,0.12); /* Hairline Border */
+    position: relative;
+    transition: background 0.2s;
+}
+
+/* Letztes Element ohne Border */
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.list-item:active {
+    background-color: #E5E5EA; /* Haptic Touch Feedback Farbe */
+}
+
+.list-item label {
+    font-size: 1rem;
+    color: var(--ios-text);
+    font-weight: 400;
+    flex-grow: 1;
+    margin: 0;
+}
+
+/* INPUTS & SELECTS - Der "Invisible" Look */
+.input-wrapper, .select-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+input, select {
+    font-size: 1.1rem;
+    color: var(--ios-blue); /* Interaktive Elemente Blau */
+    border: none;
+    background: transparent;
+    text-align: right;
+    font-family: inherit;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    cursor: pointer;
+    appearance: none; /* Wichtig für Safari */
+    -webkit-appearance: none;
+}
+
+/* Input spezifisch */
+input[type="number"] {
+    width: 60px;
+}
+
+.unit {
+    color: var(--ios-label);
+    margin-left: 4px;
+    font-size: 1.1rem;
+}
+
+/* Select Pfeil Hack für Premium Feel */
+/* Wir machen das Select überlagert, aber unsichtbar, 
+   und zeigen den Text manuell oder lassen das OS das Styling übernehmen.
+   Hier: Einfacher Clean Style. Das native iOS Select zeigt rechts "Ausgewählt >" an.
+   Wir simulieren das "Chevron" nicht per CSS, sondern lassen den blauen Text wirken.
+*/
+
+.select-wrapper::after {
+    /* Optional: Kleiner Pfeil nach unten/rechts wenn gewünscht, 
+       aber im iOS Style ist blauer Text oft Indikator genug */
+    content: ''; 
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-right: 2px solid #C7C7CC;
+    border-top: 2px solid #C7C7CC;
+    transform: rotate(45deg);
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.hidden { display: none; }
+
+/* --- DETAILS --- */
+.meta-links {
+    text-align: center;
+    margin-top: 40px;
+}
+
+summary {
+    color: var(--ios-blue);
+    font-size: 0.9rem;
+    list-style: none;
+    cursor: pointer;
+}
+summary::-webkit-details-marker { display: none; }
+
+.formula-content {
+    background: white;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: left;
+    font-size: 0.85rem;
+    color: #333;
+    font-family: monospace;
+}
+
+.step { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+.step-title { font-weight: bold; color: var(--brand-copper); margin-bottom: 5px; font-family: sans-serif; }

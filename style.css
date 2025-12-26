@@ -25,13 +25,32 @@ body {
 header {
     background: var(--primary);
     color: white;
-    padding: 15px 20px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+    /* Fix für Sticky Header + Status Bar */
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
+    
+    /* Innenabstand für die Notch (Safe Area) */
+    padding-top: env(safe-area-inset-top); 
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 15px;
+    
+    /* Schatten für Tiefe */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
+
+/* Der eigentliche Titel braucht etwas Abstand nach oben, 
+   damit er nicht direkt an der Notch klebt, falls env() nicht greift */
+header h1 {
+    margin: 0;
+    padding-top: 10px; 
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
 
 h1 {
     margin: 0;

@@ -131,3 +131,33 @@ function createStepLog(title, ...rows) {
 
 // Initialer Start
 calculate();
+
+
+
+
+
+
+
+
+// iOS Install Detection
+function showInstallPrompt() {
+    // 1. Prüfen ob iOS (iPhone/iPad/iPod)
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    
+    // 2. Prüfen ob bereits im "Standalone" (App) Modus
+    const isStandalone = window.navigator.standalone === true;
+
+    // Nur zeigen wenn iOS UND NICHT installiert
+    if (isIOS && !isStandalone) {
+        const prompt = document.getElementById('ios-install-prompt');
+        prompt.classList.remove('hidden');
+
+        // Schließen Button Logik
+        document.getElementById('close-prompt').addEventListener('click', () => {
+            prompt.classList.add('hidden');
+        });
+    }
+}
+
+// Kurz warten damit die Seite erst lädt
+setTimeout(showInstallPrompt, 2000); 

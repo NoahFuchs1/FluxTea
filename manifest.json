@@ -1,6 +1,6 @@
 {
   "name": "FluxTea",
-  "short_name": "Tee",
+  "short_name": "FluxTea",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f0f2f5",

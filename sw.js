@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tee-app-v1';
+const CACHE_NAME = 'tee-app-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -25,4 +25,20 @@ self.addEventListener('fetch', (e) => {
       return response || fetch(e.request);
     })
   );
+});
+
+// Neuer Event Listener: Aufräumen alter Caches
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+        if (key !== CACHE_NAME) {
+          console.log('[ServiceWorker] Entferne alten Cache', key);
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+  // Wichtig: Sofort die Kontrolle übernehmen
+  return self.clients.claim();
 });
